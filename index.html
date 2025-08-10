@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Redirecting...</title>
+  <script>
+    window.onload = function () {
+      let target = "https://onlyfans.com/zaddymaxy"; // Destination URL
+      let ua = navigator.userAgent.toLowerCase();
+
+      // Detect Instagram/TikTok/Facebook in-app browsers
+      let inAppBrowser = ua.includes("instagram") || ua.includes("tiktok") || ua.includes("fbav") || ua.includes("fb_iab");
+
+      if (inAppBrowser) {
+        // Android: Chrome intent
+        if (ua.includes("android")) {
+          window.location.href = "intent://" + target.replace(/^https?:\/\//, "") + "#Intent;scheme=https;package=com.android.chrome;end";
+          setTimeout(() => { window.location.href = target; }, 1500);
+        } 
+        // iOS: Safari via Chrome scheme fallback
+        else if (ua.includes("iphone") || ua.includes("ipad")) {
+          window.location.href = "googlechrome://" + target.replace(/^https?:\/\//, "");
+          setTimeout(() => { window.location.href = target; }, 1500);
+        } 
+        // Fallback for unknown UA
+        else {
+          window.location.href = target;
+        }
+      } else {
+        // Regular browsers
+        window.location.href = target;
+      }
+    };
+  </script>
+</head>
+<body style="background:black;color:white;text-align:center;margin-top:50px;">
+  <h1>Redirecting to OnlyFans…</h1>
+</body>
+</html>
